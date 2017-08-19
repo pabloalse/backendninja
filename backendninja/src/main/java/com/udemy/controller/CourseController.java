@@ -10,8 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-
-import com.udemy.entity.Course;
+import com.udemy.model.CourseModel;
 import com.udemy.services.CourseService;
 
 @Controller
@@ -29,15 +28,15 @@ public class CourseController {
 	public ModelAndView listAllCourses() {
 		LOG.info("Call: " + "listAllCourses()");
 		ModelAndView mov = new ModelAndView(COURSES_VIEW);
-		mov.addObject("course", new Course());
-		mov.addObject("courses", courseService.listAllCourses());
+		mov.addObject("courseModel", new CourseModel());
+		mov.addObject("coursesModel", courseService.listAllCourses());
 		return mov;
 	}
 
 	@PostMapping("/addcourse")
-	public String addCourse(@ModelAttribute("course")Course course){
-		LOG.info("Call: " + "addCourse()" + "-- Param: " + course.toString());
-		courseService.addCourse(course);
+	public String addCourse(@ModelAttribute("course")CourseModel courseModel){
+		LOG.info("Call: " + "addCourse()" + "-- Param: " + courseModel.toString());
+		courseService.addCourse(courseModel);
 		return "redirect:/courses/listCourses";
 	}
 	

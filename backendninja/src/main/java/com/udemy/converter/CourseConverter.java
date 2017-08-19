@@ -1,7 +1,6 @@
-package converter;
+package com.udemy.converter;
 
 import org.springframework.stereotype.Component;
-
 import com.udemy.entity.Course;
 import com.udemy.model.CourseModel;
 

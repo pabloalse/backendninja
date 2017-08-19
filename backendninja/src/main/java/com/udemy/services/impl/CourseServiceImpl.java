@@ -1,5 +1,6 @@
 package com.udemy.services.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -7,7 +8,10 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+
+import com.udemy.converter.CourseConverter;
 import com.udemy.entity.Course;
+import com.udemy.model.CourseModel;
 import com.udemy.repository.CourseJpaRepository;
 import com.udemy.services.CourseService;
 
@@ -20,17 +24,30 @@ public class CourseServiceImpl implements CourseService{
 	@Qualifier("courseJpaRepository")
 	private CourseJpaRepository courseJpaRepository;
 	
+	@Autowired
+	@Qualifier("courseConverter")
+	private CourseConverter courseConverter;
+	
 	
 	@Override
-	public List<Course> listAllCourses() {
+	public List<CourseModel> listAllCourses() {
 		LOG.info("Call: " + "listAllCourses()");
-		return courseJpaRepository.findAll();
+		List<Course> listCourse = courseJpaRepository.findAll();
+		List<CourseModel> listCourseModel = new ArrayList<CourseModel>();
+		int listCourseSize = listCourse.size();
+		
+		for(int i=0;i<listCourseSize;i++){
+			
+			listCourseModel.add(courseConverter.entity2model(listCourse.get(i)));			
+		}
+		
+		return listCourseModel;
 	}
 
 	@Override
-	public Course addCourse(Course course) {
+	public Course addCourse(CourseModel courseModel) {
 		LOG.info("Call: " + "addCourse()");
-		return courseJpaRepository.save(course);
+		return courseJpaRepository.save(courseConverter.model2entity(courseModel));
 	}
 
 	@Override
