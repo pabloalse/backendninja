@@ -16,31 +16,30 @@ import com.udemy.repository.CourseJpaRepository;
 import com.udemy.services.CourseService;
 
 @Service("courseServiceImpl")
-public class CourseServiceImpl implements CourseService{
+public class CourseServiceImpl implements CourseService {
 
 	private static final Log LOG = LogFactory.getLog(CourseServiceImpl.class);
-	
+
 	@Autowired
 	@Qualifier("courseJpaRepository")
 	private CourseJpaRepository courseJpaRepository;
-	
+
 	@Autowired
 	@Qualifier("courseConverter")
 	private CourseConverter courseConverter;
-	
-	
+
 	@Override
 	public List<CourseModel> listAllCourses() {
 		LOG.info("Call: " + "listAllCourses()");
 		List<Course> listCourse = courseJpaRepository.findAll();
 		List<CourseModel> listCourseModel = new ArrayList<CourseModel>();
 		int listCourseSize = listCourse.size();
-		
-		for(int i=0;i<listCourseSize;i++){
-			
-			listCourseModel.add(courseConverter.entity2model(listCourse.get(i)));			
+
+		for (int i = 0; i < listCourseSize; i++) {
+
+			listCourseModel.add(courseConverter.entity2model(listCourse.get(i)));
 		}
-		
+
 		return listCourseModel;
 	}
 
@@ -52,15 +51,18 @@ public class CourseServiceImpl implements CourseService{
 
 	@Override
 	public int removeCourse(int id) {
+		LOG.info("Call: " + "removeCourse()");
 		courseJpaRepository.delete(id);
 		return 0;
 	}
 
 	@Override
-	public Course updateCourse(Course course) {
-		
-		return courseJpaRepository.save(course);
+	public Course updateCourse(CourseModel courseModel) {
+		LOG.info("Call: " + "updateCourse()");
+		int id = courseModel.getId();
+		LOG.info("Call: " + "removeCourse()");
+		courseJpaRepository.delete(id);
+		return courseJpaRepository.save(courseConverter.model2entity(courseModel));
 	}
 
-	
 }

@@ -14,6 +14,7 @@ public class CourseConverter {
 		courseModel.setDescription(course.getDescription());
 		courseModel.setPrice(course.getPrice());
 		courseModel.setHours(course.getHours());
+		courseModel.setId(course.getId());
 		return courseModel;		
 	}
 	
@@ -24,6 +25,7 @@ public class CourseConverter {
 		course.setDescription(courseModel.getDescription());
 		course.setPrice(courseModel.getPrice());
 		course.setHours(courseModel.getHours());
+		course.setId(courseModel.getId());
 		return course;		
 	}
 }

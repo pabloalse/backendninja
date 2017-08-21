@@ -8,6 +8,7 @@
 <table>
 	<thead> 
 		<tr>
+			<th>ID</th>
 			<th>Name</th>
 			<th>Description</th>
 			<th>Price</th>
@@ -16,6 +17,7 @@
 	</thead>
 	<tbody>
 		<tr th:each="course : ${coursesModel}">
+			<th><span th:text="${course.id}"></span></th>
 			<th><span th:text="${course.name}"></span></th>
 			<th><span th:text="${course.description}"></span></th>
 			<th><span th:text="${course.price}"></span></th>
@@ -31,5 +33,20 @@
 <p>Hours: <input type="number" th:field="*{hours}"/></p>
 <p><input type="submit" value="Submit"/></p>
 </form>
+
+<form action="#" th:action="@{/courses/removecourse}" th:object="${courseModel}" method="post">
+<p>ID Delete: <input type="number" th:field="*{id}"/></p>
+<p><input type="submit" value="Delete"/></p>
+</form>
+
+<form action="#" th:action="updatecourse" th:object="${courseModel}" method="post">
+<p>ID Update: <input type="number" th:field="*{id}"/></p>
+<p>Name: <input type="text" th:field="*{name}"/></p>
+<p>Description: <input type="text" th:field="*{description}"/></p>
+<p>Price: <input type="number" th:field="*{price}"/></p>
+<p>Hours: <input type="number" th:field="*{hours}"/></p>
+<p><input type="submit" value="Update"/></p>
+</form>
+
 </body>
 </html>

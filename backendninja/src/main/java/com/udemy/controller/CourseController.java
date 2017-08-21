@@ -40,4 +40,20 @@ public class CourseController {
 		return "redirect:/courses/listCourses";
 	}
 	
+
+	@PostMapping("/updatecourse")
+	public String updateCourse(@ModelAttribute("course")CourseModel courseModel){
+		LOG.info("Call: " + "addCourse()" + "-- Param: " + courseModel.toString());
+		courseService.updateCourse(courseModel);
+		return "redirect:/courses/listCourses";
+	}
+	
+	@PostMapping("/removecourse")
+	public String removeCourse(@ModelAttribute("course")CourseModel courseModel){
+		int id = courseModel.getId();
+		LOG.info("Call: " + "removeCourse()" + "-- Param: ID " + id);
+		courseService.removeCourse(id);
+		return "redirect:/courses/listCourses";
+	}
+	
 }
