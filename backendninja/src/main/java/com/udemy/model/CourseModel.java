@@ -6,7 +6,14 @@ public class CourseModel {
 	private String name;
 	private String description;
 	private int price;
+	private int id;
 	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public String getName() {
 		return name;
 	}
@@ -33,11 +40,12 @@ public class CourseModel {
 	}
 	private int hours;
 
-	public CourseModel(String name, String description, int price, int hours) {
+	public CourseModel(String name, String description, int price, int id, int hours) {
 		super();
 		this.name = name;
 		this.description = description;
 		this.price = price;
+		this.id = id;
 		this.hours = hours;
 	}
 	

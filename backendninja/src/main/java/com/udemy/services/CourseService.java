@@ -10,6 +10,6 @@ public interface CourseService {
 	public abstract List<CourseModel> listAllCourses();
 	public abstract Course addCourse(CourseModel courseModel);
 	public abstract int removeCourse(int id);
-	public abstract Course updateCourse(Course course);
+	public abstract Course updateCourse(CourseModel courseModel);
 	
 }
