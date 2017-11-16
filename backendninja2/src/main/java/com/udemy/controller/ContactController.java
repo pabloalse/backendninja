@@ -1,21 +1,42 @@
 package com.udemy.controller;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import com.udemy.constant.ViewConstant;
+import com.udemy.model.ContactModel;
 
 @Controller
 @RequestMapping("/contacts")
 public class ContactController {
-
+	
+	private static final Log LOG = LogFactory.getLog(ContactController.class);
+	
+	@GetMapping("/cancel")
+	public String cancel(){
+		return ViewConstant.CONTACTS;
+	}
+	
 	@GetMapping("/contactform")
-	private String redirectContactForm(){
-		return ViewConstant.CONTANT_FORM;
+	private String redirectContactForm(Model model){
+		model.addAttribute("contactModel", new ContactModel());
+		return ViewConstant.CONTACT_FORM;
 		
-		//prueba git
 		
 	}
+	
+	@PostMapping("/addcontact")
+	public String addContact (@ModelAttribute(name="contactModel") ContactModel contactModel, 
+			Model model){
+		LOG.info("Call: " + "addContact()" + "-- Param: " + contactModel.toString());
+		model.addAttribute("result", 1);
+		return ViewConstant.CONTACTS;		
+	}
+	
 	
 }
