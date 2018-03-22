@@ -8,13 +8,21 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 
 import com.udemy.component.RequestTimeInterceptor;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class WebMvcConfiguration.
+ */
 @Configuration
 public class WebMvcConfiguration extends WebMvcConfigurerAdapter{
 
+	/** The interceptor. */
 	@Autowired
 	@Qualifier("resquestTimeInterceptor")
 	private RequestTimeInterceptor interceptor;
 	
+	/* (non-Javadoc)
+	 * @see org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter#addInterceptors(org.springframework.web.servlet.config.annotation.InterceptorRegistry)
+	 */
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 	
